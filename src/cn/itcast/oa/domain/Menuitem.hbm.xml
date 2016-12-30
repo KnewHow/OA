@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="cn.itcast.oa.domain.Menuitem" table="menuitem">
+		<id name="mid" type="java.lang.Long" length="5">
+			<column name="mid"></column>
+			<generator class="assigned"></generator>
+		</id>
+		<property name="name" type="java.lang.String" length="20"></property>
+		<property name="url" type="java.lang.String" length="200"></property>
+		<property name="target" type="java.lang.String" length="100"></property>
+		<property name="icon" type="java.lang.String" length="100"></property>
+		<property name="isParent" type="java.lang.Boolean" length="20"></property>
+		<property name="checked" type="java.lang.Boolean" length="20"></property>
+		<property name="pid" type="java.lang.Long" length="5"></property>
+		<set name="users" table="user_menuitem" lazy="true">
+			<key column="mid"></key>
+			<many-to-many class="cn.itcast.oa.domain.User" column="uid"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

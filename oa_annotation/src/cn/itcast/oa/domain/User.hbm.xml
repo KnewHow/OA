@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="cn.itcast.oa.domain.User" table="user">
+		<id name="uid" type="java.lang.Long" length="5">
+			<column name="uid"></column>
+			<generator class="increment"></generator>
+		</id>
+		<property name="password" type="java.lang.String" length="20"></property>
+		<property name="email" type="java.lang.String" length="20"></property>
+		<property name="phone" type="java.lang.String" length="20"></property>
+		<property name="sex" type="java.lang.String" length="20"></property>
+		<property name="username" type="java.lang.String" length="20"></property>
+		<many-to-one name="department" class="cn.itcast.oa.domain.Department" cascade="all">
+			<!-- 用来描述外键 -->
+			<column name="did"></column>
+		</many-to-one>
+		
+		<set name="posts" table="user_post" inverse="false" cascade="all">
+			<key>
+				<column name="uid"></column>
+			</key>
+			<many-to-many class="cn.itcast.oa.domain.Post">
+				<column name="pid"></column>
+			</many-to-many>
+		</set>
+		
+		<set name="menuitems" table="user_menuitem">
+			<key column="uid"></key>
+			<many-to-many class="cn.itcast.oa.domain.Menuitem" column="mid"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

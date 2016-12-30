@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.oa.domain.Kynamic" table="kynamic">
+		<id name="kid" type="java.lang.Long" length="5">
+			<column name="kid"></column>
+			<generator class="increment"></generator>
+		</id>
+		<property name="pid" type="java.lang.Long" length="5"></property>
+		<property name="name" type="java.lang.String" length="20"></property>
+		<property name="isParent" type="java.lang.Boolean"></property>
+		<!-- Kynamic不维护关系，由多的一方version来维护 -->
+		<set name="versions" inverse="true">
+			<key column="kid"></key>
+			<one-to-many class="cn.itcast.oa.domain.Version"/>
+		</set>
+	</class>
+</hibernate-mapping>
